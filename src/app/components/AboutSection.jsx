@@ -60,7 +60,7 @@ const AboutSection = () => {
           <p className="text-base text-red-500 lg:text-lg">
            Nos dedicamos a transformar cada ocasión en una experiencia verdaderamente memorable.
            Imagina tu próxima fiesta cobrando vida con la presencia de nuestro vecino amistoso, el hombre araña. 
-           Inspirados por su mantra de que "un gran poder conlleva una gran responsabilidad", ¡Nos comprometemos a infundir 
+           Inspirados por su mantra de que &quot;un gran poder conlleva una gran responsabilidad&quot;, ¡Nos comprometemos a infundir 
            cada evento con ese mismo espíritu de emoción y aventura!
           </p>
           <h3 className="text-xl font-bold text-blue-800 pt-10">¿Quienes son los Spartymen?</h3>
@@ -91,7 +91,7 @@ const AboutSection = () => {
             {TAB_DATA.find((t) => t.id === tab).content}
           </div>
         </div>
-        <Image src="/images/perfil.jpg" width={500} height={500} className="rounded-2xl" />
+        <Image src="/images/perfil.jpg" alt="Foto de perfil" width={500} height={500} className="rounded-2xl" />
       </div>
     </section>
   );

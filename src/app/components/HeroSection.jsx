@@ -17,7 +17,7 @@ const HeroSection = () => {
           className="col-span-4 mt-8 sm:mt-0"
         >
           <div className="flex justify-center">
-            <Image src="/images/spiderman.png" width={300} height={300} />
+            <Image src="/images/spiderman.png" alt="Spiderman" width={300} height={300} />
           </div>
         </motion.div>
         <motion.div
@@ -33,7 +33,7 @@ const HeroSection = () => {
             <br></br>
           </h1>
           <p className="text-gray-300 text-base sm:text-lg mb-6 lg:text-xl">
-            "Un gran poder conlleva una gran responsabilidad, y la responsabilidad de Spartymen es hacer de tu fiesta algo inolvidable"
+          &quot;Un gran poder conlleva una gran responsabilidad, y la responsabilidad de Spartymen es hacer de tu fiesta algo inolvidable&quot;
           </p>
           <div>
             <Link
