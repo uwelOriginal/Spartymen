@@ -58,7 +58,7 @@ const AchievementsSection = () => {
           )}
         </div>
         <div className="bg-red-100 p-8 rounded-lg shadow-lg">
-          <h3 className="text-2xl font-bold text-red-500">Proyectos Completados</h3>
+          <h3 className="text-2xl font-bold text-red-500">Fiestas Exitosas</h3>
           {!isHidden && (
             <AnimatedNumbers
               initialValue={31}
