@@ -1,66 +1,88 @@
 "use client";
-import React from "react";
-import dynamic from "next/dynamic";
+import React, {useState, useEffect} from "react";
 
-const AnimatedNumbers = dynamic(
-  () => {
-    return import("react-animated-numbers");
-  },
-  { ssr: false }
-);
+const AnimatedNumbers = ({ initialValue, value, duration, formatValue, className }) => {
+  const [currentValue, setCurrentValue] = useState(initialValue);
 
-const achievementsList = [
-  {
-    metric: "Projects",
-    value: "100",
-    postfix: "+",
-  },
-  {
-    prefix: "~",
-    metric: "Users",
-    value: "100,000",
-  },
-  {
-    metric: "Awards",
-    value: "7",
-  },
-  {
-    metric: "Years",
-    value: "5",
-  },
-];
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (currentValue < value) {
+        setCurrentValue(prevValue => prevValue + 1);
+      } else {
+        clearInterval(interval);
+      }
+    }, duration / value);
+
+    return () => clearInterval(interval);
+  }, [value, duration, currentValue]);
+
+  return (
+    <div className={className}>
+      {formatValue(currentValue)}
+    </div>
+  );
+};
 
 const AchievementsSection = () => {
+
+  const [isHidden, setIsHidden] = useState(true);
+
   return (
     <div className="py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-      <div className="sm:border-[#33353F] sm:border rounded-md py-8 px-16 flex flex-col sm:flex-row items-center justify-between">
-        {achievementsList.map((achievement, index) => {
-          return (
-            <div
-              key={index}
-              className="flex flex-col items-center justify-center mx-4 my-4 sm:my-0"
-            >
-              <h2 className="text-white text-4xl font-bold flex flex-row">
-                {achievement.prefix}
-                <AnimatedNumbers
-                  includeComma
-                  animateToNumber={parseInt(achievement.value)}
-                  locale="en-US"
-                  className="text-white text-4xl font-bold"
-                  configs={(_, index) => {
-                    return {
-                      mass: 1,
-                      friction: 100,
-                      tensions: 140 * (index + 1),
-                    };
-                  }}
-                />
-                {achievement.postfix}
-              </h2>
-              <p className="text-[#ADB7BE] text-base">{achievement.metric}</p>
-            </div>
-          );
-        })}
+      <h2 className="text-4xl font-bold text-purple-700">Logros</h2>
+      <div className="grid grid-cols-2 gap-8 mt-8">
+        <div className="bg-blue-100 p-8 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-bold text-blue-600">Clientes Felices</h3>
+          {!isHidden && (
+            <AnimatedNumbers
+              initialValue={248}
+              value={99999}
+              duration={300000000}
+              formatValue={(value) => value.toFixed(0)}
+              className="text-5xl font-bold text-blue-900"
+            />
+          )}
+          {isHidden && (
+            <AnimatedNumbers
+              initialValue={0}
+              value={248}
+              duration={2000}
+              formatValue={(value) => {
+                if (value === 248) {
+                  setIsHidden(false);
+                }
+                return value.toFixed(0);
+              }}
+              className="text-5xl font-bold text-blue-900"
+            />
+          )}
+        </div>
+        <div className="bg-red-100 p-8 rounded-lg shadow-lg">
+          <h3 className="text-2xl font-bold text-red-500">Proyectos Completados</h3>
+          {!isHidden && (
+            <AnimatedNumbers
+              initialValue={31}
+              value={99999}
+              duration={1100000000}
+              formatValue={(value) => value.toFixed(0)}
+              className="text-5xl font-bold text-red-700"
+            />
+          )}
+          {isHidden && (
+            <AnimatedNumbers
+              initialValue={0}
+              value={31}
+              duration={2000}
+              formatValue={(value) => {
+                if (value === 31) {
+                  setIsHidden(false);
+                }
+                return value.toFixed(0);
+              }}
+              className="text-5xl font-bold text-red-700"
+            />
+          )}
+        </div>
       </div>
     </div>
   );

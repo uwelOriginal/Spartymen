@@ -1,79 +1,59 @@
 "use client";
 import React from "react";
+//import { TypeAnimation } from "react-type-animation";
+import { motion } from "framer-motion"; // Importa Framer Motion aquí para asegurarte de que se ejecute solo en el cliente
 import Image from "next/image";
-import { TypeAnimation } from "react-type-animation";
-import { motion } from "framer-motion";
 import Link from "next/link";
+import { ModeToggle } from "./theme-toggle";
 
 const HeroSection = () => {
   return (
-    <section className="lg:py-16">
-      <div className="grid grid-cols-1 sm:grid-cols-12">
+    <section className="lg:pt-16 bg-gray-900 text-center">
+      <div className="grid grid-cols-1 sm:grid-cols-12 justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.5 }}
-          className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
+          className="col-span-4 mt-8 sm:mt-0"
         >
-          <h1 className="text-white mb-4 text-4xl sm:text-5xl lg:text-8xl lg:leading-normal font-extrabold">
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-400 to-secondary-600">
-              Hello, I&apos;m{" "}
+          <div className="flex justify-center">
+            <Image src="/images/spiderman.png" width={300} height={300} />
+          </div>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5, x: "-50%" }}
+          animate={{ opacity: 1, scale: 1, x:"0%" }}
+          transition={{ duration: 0.5, delay:0.5 }}
+          className="col-span-8 text-center sm:text-left mt-8 sm:mt-0"
+        >
+          <h1 className="text-white mb-4 text-4xl sm:text-4xl lg:text-5xl lg:leading-normal font-extrabold">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-blue-700">
+              Hola, soy tu amigable vecino Spiderman. ¡Invítame a tu próxima fiesta!
             </span>
             <br></br>
-            <TypeAnimation
-              sequence={[
-                "Judy",
-                1000,
-                "Web Developer",
-                1000,
-                "Mobile Developer",
-                1000,
-                "UI/UX Designer",
-                1000,
-              ]}
-              wrapper="span"
-              speed={50}
-              repeat={Infinity}
-            />
           </h1>
-          <p className="text-[#ADB7BE] text-base sm:text-lg mb-6 lg:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam,
-            voluptuous.
+          <p className="text-gray-300 text-base sm:text-lg mb-6 lg:text-xl">
+            "Un gran poder conlleva una gran responsabilidad, y la responsabilidad de Spartymen es hacer de tu fiesta algo inolvidable"
           </p>
           <div>
             <Link
               href="/#contact"
-              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-200 text-white"
+              className="px-6 inline-block py-3 w-full sm:w-fit rounded-full mr-4 bg-gradient-to-br from-red-500 to-red-400 hover:bg-gray-200 text-white transition ease-in-out hover:scale-110 duration-300"
             >
-              Hire Me
+              ¡Contrata YA!
             </Link>
-            <Link
-              href="/"
-              className="px-1 inline-block py-1 w-full sm:w-fit rounded-full bg-gradient-to-br from-primary-500 to-secondary-500 hover:bg-slate-800 text-white mt-3"
-            >
-              <span className="block bg-[#121212] hover:bg-slate-800 rounded-full px-5 py-2">
-                Download CV
-              </span>
-            </Link>
-          </div>
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5 }}
-          className="col-span-4 place-self-center mt-4 lg:mt-0"
-        >
-          <div className="rounded-full bg-[#181818] w-[250px] h-[250px] lg:w-[400px] lg:h-[400px] relative">
-            <Image
-              src="/images/hero-image.png"
-              alt="hero image"
-              className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-              width={300}
-              height={300}
-            />
           </div>
         </motion.div>
       </div>
+      <motion.div
+          initial={{ opacity: 0, scale: 0.5, x: "-15%",y: "-100%"}}
+          animate={{ opacity: 1, scale: 1, x: "0%", y: "0%" }}
+          transition={{ duration: 0.5, delay: 0.8}}
+        >
+          <div className="flex justify-start p-5">
+            <ModeToggle />
+          </div>
+      </motion.div>
     </section>
   );
 };

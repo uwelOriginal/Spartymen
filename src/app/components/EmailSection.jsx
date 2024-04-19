@@ -1,9 +1,12 @@
+// ./src/app/components/EmailSection.jsx
+
 "use client";
 import React, { useState } from "react";
-import GithubIcon from "../../../public/github-icon.svg";
+import FacebookIcon from "../../../public/facebook-icon.svg";
 import LinkedinIcon from "../../../public/linkedin-icon.svg";
 import Link from "next/link";
 import Image from "next/image";
+import reactTextareaAutosize from "react-textarea-autosize";
 
 const EmailSection = () => {
   const [emailSubmitted, setEmailSubmitted] = useState(false);
@@ -15,116 +18,113 @@ const EmailSection = () => {
       subject: e.target.subject.value,
       message: e.target.message.value,
     };
-    const JSONdata = JSON.stringify(data);
-    const endpoint = "/api/send";
-
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
-
-    const response = await fetch(endpoint, options);
-    const resData = await response.json();
-
-    if (response.status === 200) {
-      console.log("Message sent.");
-      setEmailSubmitted(true);
+  
+    try {
+      
+        console.log("Message sent.");
+        setEmailSubmitted(true);
+        setTimeout(() => {
+          setEmailSubmitted(false);
+        }, 5000);
+      
+    } catch (error) {
+      console.error("Error sending message:", error);
     }
+  
+    // Clear input fields
+    e.target.email.value = "";
+    e.target.subject.value = "";
+    e.target.message.value = "";
   };
+  
 
   return (
-    <section
-      id="contact"
-      className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative"
-    >
-      <div className="bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-primary-900 to-transparent rounded-full h-80 w-80 z-0 blur-lg absolute top-3/4 -left-4 transform -translate-x-1/2 -translate-1/2"></div>
-      <div className="z-10">
-        <h5 className="text-xl font-bold text-white my-2">
-          Let&apos;s Connect
+    <section id="contact" className="grid md:grid-cols-2 my-12 md:my-12 py-24 gap-4 relative">
+      <div>
+        <h5 className="text-xl font-bold my-2">
+          <span style={{ color: 'red' }}>Hablemos</span>
         </h5>
-        <p className="text-[#ADB7BE] mb-4 max-w-md">
-          {" "}
-          I&apos;m currently looking for new opportunities, my inbox is always
-          open. Whether you have a question or just want to say hi, I&apos;ll
-          try my best to get back to you!
+        <p className="mb-4 max-w-md">
+          ¿Listo para llevar tu próxima fiesta al siguiente nivel? ¡Genial! Estamos aquí para ayudarte a hacerlo 
+          realidad. Ponte en contacto con nosotros para discutir tus ideas, solicitar un presupuesto personalizado 
+          o simplemente para decir hola. Nos encantaría escucharte y trabajar juntos para crear la fiesta perfecta.
         </p>
-        <div className="socials flex flex-row gap-2">
-          <Link href="github.com">
-            <Image src={GithubIcon} alt="Github Icon" />
+        <br></br>
+        <div className="socials flex flex-row gap-5 flex justify-center w-28 h-15">
+          <Link href="https://www.facebook.com" className="bg-red-500 rounded-full p-3 w-20 transition ease-in-out hover:scale-110 duration-300">
+            <Image src={FacebookIcon} alt="Facebook Icon" />
           </Link>
-          <Link href="linkedin.com">
-            <Image src={LinkedinIcon} alt="Linkedin Icon" />
+          <Link href="https://www.linkedin.com" className="bg-red-500 rounded-full p-3 w-20 transition ease-in-out hover:scale-110 duration-300">
+            <Image src={LinkedinIcon} alt="Linkedin Icon"/>
           </Link>
         </div>
       </div>
       <div>
-        {emailSubmitted ? (
+        {emailSubmitted && (
           <p className="text-green-500 text-sm mt-2">
-            Email sent successfully!
+            ¡Correo electrónico enviado exitosamente!
           </p>
-        ) : (
-          <form className="flex flex-col" onSubmit={handleSubmit}>
-            <div className="mb-6">
-              <label
-                htmlFor="email"
-                className="text-white block mb-2 text-sm font-medium"
-              >
-                Your email
-              </label>
-              <input
-                name="email"
-                type="email"
-                id="email"
-                required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="jacob@google.com"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="subject"
-                className="text-white block text-sm mb-2 font-medium"
-              >
-                Subject
-              </label>
-              <input
-                name="subject"
-                type="text"
-                id="subject"
-                required
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Just saying hi"
-              />
-            </div>
-            <div className="mb-6">
-              <label
-                htmlFor="message"
-                className="text-white block text-sm mb-2 font-medium"
-              >
-                Message
-              </label>
-              <textarea
-                name="message"
-                id="message"
-                className="bg-[#18191E] border border-[#33353F] placeholder-[#9CA2A9] text-gray-100 text-sm rounded-lg block w-full p-2.5"
-                placeholder="Let's talk about..."
-              />
-            </div>
-            <button
-              type="submit"
-              className="bg-primary-500 hover:bg-primary-600 text-white font-medium py-2.5 px-5 rounded-lg w-full"
-            >
-              Send Message
-            </button>
-          </form>
         )}
+        <form className="flex flex-col" onSubmit={handleSubmit}>
+          <div className="mb-6">
+            <label
+              htmlFor="email"
+              className="text-red-500 block mb-2 text-sm font-medium"
+            >
+              Tu email
+            </label>
+            <input
+              name="email"
+              type="email"
+              id="email"
+              required
+              className="bg-[#18191E] border border-[#33353F] placeholder-red-300 text-blue-300 text-sm rounded-lg block w-full p-2.5"
+              placeholder="email"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="subject"
+              className="text-red-500 block text-sm mb-2 font-medium"
+            >
+              Asunto
+            </label>
+            <input
+              name="subject"
+              type="text"
+              id="subject"
+              required
+              className="bg-[#18191E] border border-[#33353F] placeholder-red-300 text-blue-300 text-sm rounded-lg block w-full p-2.5"
+              placeholder="Solo saludando"
+            />
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="message"
+              className="text-red-500 block text-sm mb-2 font-medium"
+            >
+              Mensaje
+            </label>
+            <textarea
+              name="message"
+              id="message"
+              required
+              className="bg-[#18191E] border border-[#33353F] placeholder-red-300 text-blue-300 text-sm rounded-lg block w-full p-2.5"
+              placeholder="Escribe tu mensaje aquí..."
+              style={{overflow: 'hidden', resize: 'none'}}
+              onInput={e => {
+                e.target.style.height = 'auto';
+                e.target.style.height = e.target.scrollHeight + 'px';
+              }}
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="bg-red-500 text-white text-sm font-medium rounded-lg block w-full p-2.5 hover:bg-red-700"
+          >
+            Enviar
+          </button>
+        </form>
       </div>
     </section>
   );

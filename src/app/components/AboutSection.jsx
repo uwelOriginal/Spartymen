@@ -5,36 +5,38 @@ import TabButton from "./TabButton";
 
 const TAB_DATA = [
   {
-    title: "Skills",
+    title: "Habilidades",
     id: "skills",
     content: (
-      <ul className="list-disc pl-2">
-        <li>Node.js</li>
-        <li>Express</li>
-        <li>PostgreSQL</li>
-        <li>Sequelize</li>
-        <li>JavaScript</li>
-        <li>React</li>
+      <ul className="list-disc text-red-500 pl-2">
+        <li>Bailar</li>
+        <li className="text-blue-500">Acrobacias</li>
+        <li>Coaching</li>
+        <li className="text-blue-500">Doble de riesgo</li>
+        <li>Cantar</li>
+        <li className="text-blue-500">Sorprender</li>
+        <li>Fotografías</li>
       </ul>
     ),
   },
   {
-    title: "Education",
-    id: "education",
+    title: "Limitaciones",
+    id: "limit",
     content: (
-      <ul className="list-disc pl-2">
-        <li>Fullstack Academy of Code</li>
-        <li>University of California, Santa Cruz</li>
+      <ul className="list-disc text-red-500 pl-2">
+        <li>¡Se acabó la telaraña! Spartyman puede tardar hasta una hora llegar </li>
+        <li className="text-blue-500">El sentido arácnido se está calibrando, Spartyman no puede pelear por el momento </li>
+        <li>Spartyman tiene sentimientos. En caso de accidentes, necesitará de su apoyo económico para recuperarse </li>
       </ul>
     ),
   },
   {
-    title: "Certifications",
-    id: "certifications",
+    title: "Motivaciones",
+    id: "motives",
     content: (
-      <ul className="list-disc pl-2">
-        <li>AWS Cloud Practitioner</li>
-        <li>Google Professional Cloud Developer</li>
+      <ul className="list-disc text-red-500 pl-2">
+        <li>Ser un héroe no es fácil. Spartyman tiene tarifas de MX$500 a MX$2000</li>
+        <li className="text-blue-500">Favor realizar los pagos después del evento en un plazo menor a 48 horas ¡Spartyman necesita a su ayuda!</li>
       </ul>
     ),
   },
@@ -51,46 +53,45 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="text-white" id="about">
+    <section className="pt-10" id="about">
       <div className="md:grid md:grid-cols-2 gap-8 items-center py-8 px-4 xl:gap-16 sm:py-16 xl:px-16">
-        <Image src="/images/about-image.png" width={500} height={500} />
         <div className="mt-4 md:mt-0 text-left flex flex-col h-full">
-          <h2 className="text-4xl font-bold text-white mb-4">About Me</h2>
-          <p className="text-base lg:text-lg">
-            I am a full stack web developer with a passion for creating
-            interactive and responsive web applications. I have experience
-            working with JavaScript, React, Redux, Node.js, Express, PostgreSQL,
-            Sequelize, HTML, CSS, and Git. I am a quick learner and I am always
-            looking to expand my knowledge and skill set. I am a team player and
-            I am excited to work with others to create amazing applications.
+          <h2 className="text-4xl font-bold text-red-500 mb-4 pb-5">Sobre Nosotros</h2>
+          <p className="text-base text-red-500 lg:text-lg">
+           Nos dedicamos a transformar cada ocasión en una experiencia verdaderamente memorable.
+           Imagina tu próxima fiesta cobrando vida con la presencia de nuestro vecino amistoso, el hombre araña. 
+           Inspirados por su mantra de que "un gran poder conlleva una gran responsabilidad", ¡Nos comprometemos a infundir 
+           cada evento con ese mismo espíritu de emoción y aventura!
           </p>
+          <h3 className="text-xl font-bold text-blue-800 pt-10">¿Quienes son los Spartymen?</h3>
           <div className="flex flex-row justify-start mt-8">
             <TabButton
               selectTab={() => handleTabChange("skills")}
               active={tab === "skills"}
             >
               {" "}
-              Skills{" "}
+              Habilidades{" "}
             </TabButton>
             <TabButton
-              selectTab={() => handleTabChange("education")}
-              active={tab === "education"}
+              selectTab={() => handleTabChange("limit")}
+              active={tab === "limit"}
             >
               {" "}
-              Education{" "}
+              Limitaciones{" "}
             </TabButton>
             <TabButton
-              selectTab={() => handleTabChange("certifications")}
-              active={tab === "certifications"}
+              selectTab={() => handleTabChange("motives")}
+              active={tab === "motives"}
             >
               {" "}
-              Certifications{" "}
+              Motivaciones{" "}
             </TabButton>
           </div>
           <div className="mt-8">
             {TAB_DATA.find((t) => t.id === tab).content}
           </div>
         </div>
+        <Image src="/images/perfil.jpg" width={500} height={500} className="rounded-2xl" />
       </div>
     </section>
   );
